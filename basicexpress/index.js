@@ -1,6 +1,9 @@
 const express = require('express');
 const app = express();
 
+app.set('view engine', 'pug');
+app.set('views', './public');
+
 
 const port = 4444;
 app.use(express.static('public'));
@@ -8,6 +11,14 @@ app.use('/static', express.static('public/css'));
 
 app.get("/", (req, res) => {
     res.send("Welcome to express");
+});
+
+app.get("/index", (req, res) => {
+    res.render('index', {title :'This is title', content : 'this is content of the of the page'})
+});
+
+app.get("/html", (req, res) => {
+    res.sendFile(__dirname + '/public/html/index.html');
 });
 
 app.get("/html", (req, res) => {
